@@ -5,12 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-@Getter
-@ToString
-@EqualsAndHashCode
-@AllArgsConstructor
-public class User
+
+public record User (Long id, String alias)
 {
-    Long id;
-    private String alias;
 }

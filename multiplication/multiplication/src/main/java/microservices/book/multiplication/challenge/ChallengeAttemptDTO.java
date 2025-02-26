@@ -15,4 +15,24 @@ public class ChallengeAttemptDTO
     String userAlias;
     @Positive
     int guess;
+
+    public int getFactorA()
+    {
+        return factorA;
+    }
+
+    public int getFactorB()
+    {
+        return factorB;
+    }
+
+    public int getGuess()
+    {
+        return guess;
+    }
+
+    public String getUserAlias()
+    {
+        return userAlias;
+    }
 }
