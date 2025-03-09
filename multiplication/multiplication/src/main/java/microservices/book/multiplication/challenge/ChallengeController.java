@@ -26,7 +26,7 @@ class ChallengeController
     @GetMapping("/random")
     Challenge getRandomChallenge(){
         Challenge challenge = challengeGeneratorService.randomChallenge();
-        log.info("Challenge: {}", challenge);
+        log.info("Challenge: {}", challenge.toString());
         return challenge;
     }
 }
