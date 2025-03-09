@@ -11,7 +11,7 @@ interface FactorFetcherProps {
     onDataFetched: (data: FactorData) => void;
 }
 
-const FactorFetcher: React.FC<FactorFetcherProps> = ({ onDataFetched }) => {
+const PostAttempt: React.FC<FactorFetcherProps> = ({ onDataFetched }) => {
     const [loading, setLoading] = useState(false);
     const [guess, setGuess] = useState<number | "">("");
     const [factorA, setFactorA] = useState<number>(0);
@@ -60,10 +60,28 @@ const FactorFetcher: React.FC<FactorFetcherProps> = ({ onDataFetched }) => {
 
     return (
         <Fragment>
-            <button style={styles.button} onClick={fetchData} disabled={loading}>
-                {loading ? "Loading..." : "Get New Factors"}
+            <input
+                type="text"
+                placeholder="Enter your alias"
+                value={userAlias}
+                onChange={(e) => setUserAlias(e.target.value)}
+                style={styles.input}
+            />
+
+            <input
+                type="number"
+                placeholder="Enter your guess"
+                value={guess}
+                onChange={(e) => setGuess(Number(e.target.value))}
+                style={styles.input}
+            />
+
+            <button style={styles.button} onClick={sendData}>
+                Submit Guess
             </button>
-        </Fragment>
+
+            <hr style={styles.divider} />
+        </Fragment >
     );
 };
 
@@ -105,4 +123,4 @@ const styles = {
     },
 };
 
-export default FactorFetcher;
+export default PostAttempt;
