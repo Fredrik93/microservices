@@ -1,5 +1,5 @@
-function MyButton() {
+function Button() {
     return (
         <button> button</button>
     );
-} export default MyButton
+} export default Button
