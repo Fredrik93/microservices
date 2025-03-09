@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Button from './components/Button'
 import './App.css'
-import GetChallenges from './components/GetChallenges'
+import GetChallenges from './components/Challenges'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,7 +20,7 @@ function App() {
     <div style={styles.container}>
       <div style={styles.card}>
         <h1 style={styles.heading}>{factorA} + {factorB}</h1>
-        <GetChallenges onDataFetched={handleGetChallenges} />
+        <GetChallenges onDataFetched={handleGetChallenges} factorA={factorA} />
       </div>
     </div>
   );
