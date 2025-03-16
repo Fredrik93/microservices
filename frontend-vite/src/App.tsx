@@ -20,9 +20,8 @@ function App() {
   return (
     <div style={styles.card}>
       <div style={styles.container}>
-        <h1 style={styles.heading}>{factorA} + {factorB}</h1>
+        <h1 style={styles.heading}>{factorA} * {factorB}</h1>
         <PostAttempt onDataFetched={handleGetChallenges} />
-        <GetChallenges onDataFetched={handleGetChallenges} />
       </div>
     </div>
   );

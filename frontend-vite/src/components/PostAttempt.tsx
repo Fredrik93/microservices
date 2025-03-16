@@ -40,7 +40,7 @@ const PostAttempt: React.FC<FactorFetcherProps> = ({ onDataFetched }) => {
         }
 
         const requestData = { factorA, factorB, userAlias, guess };
-
+        console.log("the data: " + factorA + " " + factorB)
         fetch("http://localhost:8080/attempts", {
             method: "POST",
             headers: {
@@ -60,6 +60,7 @@ const PostAttempt: React.FC<FactorFetcherProps> = ({ onDataFetched }) => {
 
     return (
         <Fragment>
+
             <input
                 type="text"
                 placeholder="Enter your alias"
@@ -81,6 +82,9 @@ const PostAttempt: React.FC<FactorFetcherProps> = ({ onDataFetched }) => {
             </button>
 
             <hr style={styles.divider} />
+            <button style={styles.button} onClick={fetchData} disabled={loading}>
+                {loading ? "Loading..." : "Get New Factors"}
+            </button>
         </Fragment >
     );
 };
