@@ -2,32 +2,24 @@ package microservices.book.multiplication.challenge;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.juli.logging.LogFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+/**
+ * This class implements a REST API to get random challenges
+ */
+@Slf4j
+@RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/challenges")
-class ChallengeController
-{
-    private final ChallengeGeneratorService challengeGeneratorService;
-    private static final Logger log = LoggerFactory.getLogger(ChallengeController.class);
+@CrossOrigin(origins = "http://localhost:5173")
+public class ChallengeController {
 
-    ChallengeController(ChallengeGeneratorService challengeGeneratorService)
-    {
-        this.challengeGeneratorService = challengeGeneratorService;
-    }
+    private final ChallengeGeneratorService challengeGeneratorService;
 
     @GetMapping("/random")
-    Challenge getRandomChallenge(){
+    Challenge getRandomChallenge() {
         Challenge challenge = challengeGeneratorService.randomChallenge();
-        int correctAnswer = challenge.factorA() * challenge.factorB();
-        log.info("Challenge: {}", challenge + " correct asnswer: " + correctAnswer);
+        log.info("Generating a random challenge: {}", challenge);
         return challenge;
     }
 }

@@ -1,9 +1,22 @@
 package microservices.book.multiplication.challenge;
 
+import lombok.*;
 import microservices.book.multiplication.user.User;
+import jakarta.persistence.*;
 
-
-public record ChallengeAttempt (Long id, User userId, int factorA, int factorB, int resultAttempt, boolean correct)
-{
-
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ChallengeAttempt {
+    @Id
+    @GeneratedValue
+    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "APP_USER")
+    private User user;
+    private int factorA;
+    private int factorB;
+    private int resultAttempt;
+    private boolean correct;
 }

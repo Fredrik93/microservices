@@ -1,11 +1,24 @@
 package microservices.book.multiplication.user;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
+import jakarta.persistence.*;
 
+/**
+ * Stores information to identify the user.
+ */
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "app_user")
+public class User {
 
-public record User (Long id, String alias)
-{
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String alias;
+
+    public User(final String userAlias) {
+        this(null, userAlias);
+    }
 }

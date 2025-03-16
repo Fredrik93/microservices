@@ -1,24 +1,34 @@
 package microservices.book.multiplication.challenge;
 
-import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+
+/**
+ * This class provides a REST API to POST the attempts from users.
+ */
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/attempts")
 @CrossOrigin(origins = "http://localhost:5173")
-public class ChallengeAttemptController
-{
-    private final ChallengeService challengeService;
-    private static final Logger log = LoggerFactory.getLogger(ChallengeAttemptController.class);
+class ChallengeAttemptController {
 
-    public ChallengeAttemptController (ChallengeService challengeService){
-        this.challengeService = challengeService;
-    }
+    private final ChallengeService challengeService;
+
     @PostMapping
-    ResponseEntity<ChallengeAttempt> postResult(@RequestBody @Valid ChallengeAttemptDTO challengeAttemptDTO){
+    ResponseEntity<ChallengeAttempt> postResult(
+            @RequestBody @Valid ChallengeAttemptDTO challengeAttemptDTO) {
         return ResponseEntity.ok(challengeService.verifyAttempt(challengeAttemptDTO));
+    }
+
+    @GetMapping
+    ResponseEntity<List<ChallengeAttempt>> getStatistics(
+            @RequestParam("alias") String alias) {
+        return ResponseEntity.ok(challengeService.getStatsForUser(alias));
     }
 }
