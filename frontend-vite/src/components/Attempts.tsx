@@ -17,7 +17,7 @@ const PostAttempt: React.FC<FactorFetcherProps> = ({ onDataFetched }) => {
     const [factorA, setFactorA] = useState<number>(0);
     const [factorB, setFactorB] = useState<number>(0);
     const [userAlias, setUserAlias] = useState<string>("");
-
+    const [attempts, setAttempts] = useState([]);
     // Function to fetch new data
     const fetchData = () => {
         setLoading(true);
@@ -53,6 +53,22 @@ const PostAttempt: React.FC<FactorFetcherProps> = ({ onDataFetched }) => {
             .catch((error) => console.error("An error occurred:", error));
     };
 
+    // Get statistics for a user 
+    const fetchStatistics = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch(`http://localhost:8080/attempts?alias=${userAlias}`);
+            const data = await response.json();
+            setAttempts(data); // Store data in state
+            console.log(data)
+        } catch (error) {
+            console.error("An error occurred: ", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
     // Fetch data when the component first mounts (page load)
     useEffect(() => {
         fetchData();
@@ -85,6 +101,34 @@ const PostAttempt: React.FC<FactorFetcherProps> = ({ onDataFetched }) => {
             <button style={styles.button} onClick={fetchData} disabled={loading}>
                 {loading ? "Loading..." : "Get New Factors"}
             </button>
+
+
+            <hr style={styles.divider} />
+            <button style={styles.button} onClick={fetchStatistics} disabled={loading}>
+                {loading ? "Loading..." : "Get Statistics"}
+            </button>
+            {/* Table to display fetched data */}
+            {attempts.length > 0 && (
+                <table style={styles.table}>
+                    <thead>
+                        <tr>
+                            <th>Alias</th>
+                            <th>Guess</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {attempts.map((attempt, index) => (
+                            <tr key={index}>
+                                <td>{userAlias}</td>
+                                <td>{attempt.resultAttempt}</td>
+                                <td>{attempt.correct ? "✅ Correct" : "❌ Incorrect"}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
+
         </Fragment >
     );
 };

@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import Button from './components/Button'
 import './App.css'
 import GetChallenges from './components/Challenges'
-import PostAttempt from './components/PostAttempt'
+import PostAttempt from './components/Attempts'
 
 function App() {
   const [count, setCount] = useState(0)
