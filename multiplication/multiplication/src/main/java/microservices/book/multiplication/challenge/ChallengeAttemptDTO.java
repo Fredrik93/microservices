@@ -31,7 +31,7 @@ public class ChallengeAttemptDTO
         return guess;
     }
 
-    public String getUserAlias()
+    public String getAlias()
     {
         return userAlias;
     }
